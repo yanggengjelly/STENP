@@ -1,23 +1,55 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="ko">
   <head>
     <meta charset="UTF-8" />
-    <!-- <link rel="icon" type="image/svg+xml" href="" /> -->
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Vite App</title>
-    <link rel="stylesheet" href="./style/style.css" />
+    <title>G-Wallet</title>
+    <!-- <link rel="icon" type="image/svg+xml" href="" /> -->
+
+    <script src="./split.js/split.js"></script>
     <script type="module" src="main.js"></script>
+    <link rel="stylesheet" href="./style/style.css" />
   </head>
   <body>
     <div id="root">
       <div class="container">
         <div class="app">
-          <h1>여러 작동을 해보아요</h1>
-          <div>
-            <ul class="menu">
-              <li><div class="card"></div></li>
-              <li><div class="box bbb"></div></li>
-              <li><div class="box ccc"></div></li>
+          <span class="mainIntro">
+            <span class="mainIntro-sub">G</span>
+            WALLET</span
+          >
+          <header class="header">
+            <h1>G - Wallet</h1>
+            <div class="headerIcon">
+              <button type="button" class="alarmButton">
+                <img class="alarmImg" src="./assets/alarm.svg" alt="" />
+                <div class="alarmColor"><span class="ir">알람</span></div>
+              </button>
+            </div>
+          </header>
+          <div class="alarmSection">
+            <ul class="alarmIndex">
+              <li class="alarmBox">
+                <button type="button" class="alarmBoxBtn">
+                  <h4>무신사</h4>
+                  <p>119,000</p>
+                  <p>결제요청</p>
+                  <img src="" alt="" />
+                </button>
+              </li>
+              <section class="alarmBtnGroup">
+                <button type="button" class="alarmBtn payBtn">결제</button>
+                <button type="button" class="alarmBtn readBtn">읽음</button>
+              </section>
+              <!-- <li class="alarmBox">
+                <h4>11번가</h4>
+              </li>
+              <li class="alarmBox cafe"><h4>cafe.Beacon</h4></li>
+              <li class="alarmBox"><h4>G마켓</h4></li>
+              <li class="alarmBox"><h4>29cm</h4></li>
+              <li class="alarmBox cafe"><h4>cafe.polar</h4></li>
+              <li class="alarmBox"><h4>KREAM</h4></li>
+              <li class="alarmBox"><h4>오늘의집</h4></li> -->
             </ul>
           </div>
         </div>
