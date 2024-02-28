@@ -19,6 +19,7 @@
   "main": "main.js",
   "dependencies": {
     "esbuild": "^0.19.12",
+    "gsap": "^3.12.5",
     "nanoid": "^3.3.7",
     "picocolors": "^1.0.0",
     "postcss": "^8.4.35",
