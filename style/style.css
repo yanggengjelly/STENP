@@ -21,6 +21,8 @@
   position: relative;
   overflow: hidden;
 }
+
+/* ! Intro */
 .mainIntro {
   position: absolute;
   text-align: center;
@@ -64,45 +66,32 @@ h1 {
   right: 4px;
   border-radius: 50%;
 }
-
-/* ! Alarm style */
-.alarmSection {
-  transform: translateX(-431px);
+/* ! MAIN */
+main {
+  height: 100%;
 }
-
-.alarmIndex {
+/* ! swiper style */
+.swiper {
+  display: flex;
+  height: 100%;
+}
+.swiper-wrapper {
+  display: flex;
+  height: 100%;
+}
+.swiper-slide {
+  width: 100%;
+  height: 100%;
   display: flex;
   flex-direction: column;
-  gap: 4px;
+  gap: 20px;
 }
-.alarmBox {
-  font-size: 1.4rem;
-  padding: 20px 20px 20px 10px;
-  border-radius: 0 12px 12px 0;
-  width: 70%;
-  color: var(--color-sub-color30);
-  background-color: var(--color-sub-color70);
-}
-.alarmBoxBtn {
-  display: flex;
-  gap: 8px;
-}
-.alarmBtnGroup {
-  margin-top: -4px;
-  margin-left: 110px;
-  display: flex;
-  gap: 8px;
-}
-.alarmBtn {
-  padding: 10px 38px 20px;
-  font-size: 1.2rem;
-  font-weight: 600;
-  border-radius: 0 0 8px 8px;
-  color: var(--color-sub-color80);
-}
-.payBtn {
-  background-color: #fb6e52;
-}
-.readBtn {
-  background-color: #4b89dc;
+/* !card */
+.card {
+  background-color: antiquewhite;
+  width: 306px;
+  height: 174px;
+  margin: 0 auto;
+  border: 1px solid red;
+  box-sizing: border-box;
 }

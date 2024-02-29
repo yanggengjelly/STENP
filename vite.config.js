@@ -7,7 +7,7 @@ const viteConfig = defineConfig({
   },
   server: {
     host: "localhost",
-    port: 3000,
+    port: 5501,
     cors: true,
   },
   css: {
