@@ -17,7 +17,6 @@ tl.from(mainChars, {
 tl.from(subChars, {
   y: -300,
   duration: 1.6,
-  delay: 0.6,
   opacity: 0,
   stagger: 0.01,
   ease: "bounce.out",
@@ -25,14 +24,64 @@ tl.from(subChars, {
 tl.to(".mainIntro", {
   top: -100,
   duration: 1.6,
-  delay: 1,
   opacity: 0,
   ease: "Power3.easeIn",
 });
-tl.from(".header", {
-  y: -100,
-  duration: 1,
-  opacity: 0,
+tl.from(
+  ".header",
+  {
+    y: -100,
+    duration: 1,
+    opacity: 0,
+  },
+  "samTime"
+).from(
+  ".cardIndex",
+  {
+    duration: 1,
+    opacity: 0,
+  },
+  "samTime"
+);
+tl.from(".circle-1", {
+  y: -1000,
+  ease: "bounce.out",
+});
+tl.from(".circle-10", {
+  y: -1000,
+  ease: "bounce.out",
+});
+tl.from(".circle-9", {
+  y: -1000,
+  ease: "bounce.out",
+});
+tl.from(".circle-8", {
+  y: -1000,
+  ease: "bounce.out",
+});
+tl.from(".circle-7", {
+  y: -1000,
+  ease: "bounce.out",
+});
+tl.from(".circle-6", {
+  y: -1000,
+  ease: "bounce.out",
+});
+tl.from(".circle-5", {
+  y: -1000,
+  ease: "bounce.out",
+});
+tl.from(".circle-4", {
+  y: -1000,
+  ease: "bounce.out",
+});
+tl.from(".circle-3", {
+  y: -1000,
+  ease: "bounce.out",
+});
+tl.from(".circle-2", {
+  y: -1000,
+  ease: "bounce.out",
 });
 
 export default tl;
