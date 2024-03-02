@@ -3,6 +3,7 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <!-- STAMP + TEN = STENP -->
     <title>Stenp</title>
     <!-- <link rel="icon" type="image/svg+xml" href="" /> -->
 
@@ -28,7 +29,6 @@
               <button type="button" class="header_alarmButton">
                 <span class="ir">알람</span>
                 <img class="alarmImg" src="./assets/alarm.svg" alt="" />
-                <div class="alarmColor"><span class="ir">알람메세지</span></div>
               </button>
             </div>
           </header>
@@ -44,12 +44,36 @@
           </div>
           <main class="main scrollbar">
             <div class="cardIndex">
-              <div class="card">
-                <h3 class="cafeName">Beacon</h3>
+              <!-- ! -->
+              <div class="card stenp">
+                <h3 class="cardCafeName">Beacon</h3>
                 <p class="cafeDescription">
                   청라에 있는 아늑하고 분위기 있는 카페 입니.
                 </p>
+                <div class="couponStamp">
+                  <span data-number="1" class="stamp"
+                    ><span class="check"></span
+                  ></span>
+                  <span data-number="2" class="stamp"></span>
+                  <span data-number="3" class="stamp"></span>
+                  <span data-number="4" class="stamp"></span>
+                  <span data-number="5" class="stamp"></span>
+                  <span data-number="6" class="stamp"></span>
+                  <span data-number="7" class="stamp"></span>
+                  <span data-number="8" class="stamp"></span>
+                  <span data-number="9" class="stamp"></span>
+                  <span data-number="10" class="stamp"></span>
+                </div>
               </div>
+              <div class="cardButton_group">
+                <button type="button" class="cardButton stampAdd">
+                  적립/사용
+                </button>
+                <button type="button" class="cardButton cardDel">
+                  쿠폰삭제
+                </button>
+              </div>
+              <!-- ! -->
             </div>
             <div class="circles">
               <div class="circle circle-1"></div>
@@ -65,6 +89,7 @@
             </div>
           </main>
         </div>
+        <div class="qrModal"></div>
       </div>
     </div>
   </body>

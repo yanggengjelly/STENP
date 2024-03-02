@@ -20,7 +20,7 @@
   width: 100%;
   margin: auto;
   position: relative;
-  overflow: hidden;
+  /* overflow: hidden; */
 }
 
 /* ! Intro */
@@ -79,8 +79,9 @@ h1 {
 /* ! AlarmSpace */
 .alarmSpace {
   position: absolute;
-  width: 100%;
-  transform: translateX(-431px);
+  width: 80%;
+  transform: translateX(-345px);
+  z-index: 20;
 }
 .alarmIndex {
   display: flex;
@@ -105,7 +106,7 @@ h1 {
 .cardIndex {
   display: flex;
   flex-direction: column;
-  gap: 20px;
+  gap: 14px;
   padding: 40px 0 40px 1px;
 }
 .card {
@@ -116,20 +117,67 @@ h1 {
   background: rgba(1, 1, 1, 0.4);
   border-radius: 10px;
   z-index: 10;
-  overflow: hidden;
   backdrop-filter: blur(5px);
   padding: 20px;
   box-sizing: border-box;
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
 }
-.cafeName {
+.cardCafeName {
   font-size: 4rem;
   font-weight: 700;
-  text-shadow: 4px 4px 6px var(--color-Primary-color02);
-  margin-bottom: 16px;
+  color: var(--color-sub-color10);
+  text-shadow: 4px 4px 6px var(--color-sub-color40);
 }
 .cafeDescription {
-  font-size: 1.8rem;
+  font-size: 1.4rem;
   font-weight: 600;
   text-shadow: 4px 4px 6px var(--color-sub-color40);
   line-height: 1.4;
+}
+.couponStamp {
+  display: grid;
+  grid-template-columns: repeat(5, 1fr);
+  grid-gap: 8px;
+}
+.stamp {
+  background-color: white;
+  border: 2px solid var(--color-Primary-color04);
+  border-radius: 50%;
+  box-sizing: border-box;
+  width: 44px;
+  height: 44px;
+  position: relative;
+}
+.check {
+  background-color: var(--color-Primary-color04);
+  border-radius: 50%;
+  box-sizing: border-box;
+  width: 22px;
+  height: 22px;
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+}
+.cardButton_group {
+  display: flex;
+  justify-content: center;
+  gap: 20px;
+  z-index: 10;
+}
+.cardButton {
+  font-size: 2rem;
+  padding: 14px;
+  border-radius: 14px;
+}
+.stampAdd {
+  background-color: var(--color-Primary-color04);
+}
+.cardDel {
+  background-color: var(--color-Primary-color05);
+}
+.stenp {
+  box-shadow: 0 0 60px 0 var(--color-Primary-color03);
 }
