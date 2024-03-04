@@ -1,23 +1,31 @@
 import { gsap } from "gsap";
 import tl from "./animation.js/intro.js";
+import shake from "./animation.js/animation.js";
+import { newAddMessage, newUseMessage } from "./lib/template.js";
 
-const alarmButton = document.querySelector(".header_alarmButton");
 const alarmSpace = document.querySelector(".alarmSpace");
+const alarmButton = document.querySelector(".header_alarmButton");
+const alarmColor = document.querySelector(".information");
 
-function alarmColor() {
-  alarmButton.insertAdjacentHTML(
-    "beforeend",
-    '<div class="alarmColor"><span class="ir">알람메세지</span></div>'
-  );
-  return;
-}
+const alarmMessage = document.querySelector(".alarmIndex");
+
+const cards = document.querySelector(".card");
+
+const stamps = document.querySelectorAll(".stamp");
+const stampAdd = document.querySelector(".stampAdd");
+
+const modal = document.querySelector(".modal");
+const qrModal = document.querySelector(".qrModal");
+
+const qrImg = document.querySelector(".qrImg");
+const qrModalExitButton = document.querySelector(".qrModalExitButton");
 
 function handleAlram(e) {
   e.preventDefault();
   if (alarmSpace.classList.contains("virtualClass")) {
     alarmSpace.classList.remove("virtualClass");
     gsap.to(".alarmSpace", {
-      x: -345,
+      x: -431,
       duration: 1,
     });
   } else {
@@ -26,24 +34,71 @@ function handleAlram(e) {
       x: 0,
       duration: 1,
     });
-    // alarmButton.lastChild.remove();
+  }
+  alarmColor.classList.remove("alarmColor");
+}
+
+function handleStampAdd(e) {
+  e.preventDefault();
+  if (modal.classList.contains("virtualClass")) {
+    modal.classList.remove("virtualClass");
+    modal.classList.remove("modalRemove");
+    qrModal.classList.remove("modalRemove");
+  } else {
+    modal.classList.add("virtualClass");
+    modal.classList.remove("modalRemove");
+    qrModal.classList.remove("modalRemove");
+  }
+}
+
+function handelExit(e) {
+  e.preventDefault();
+  if (!modal.classList.contains("modalRemove")) {
+    modal.classList.add("modalRemove");
+    qrModal.classList.add("modalRemove");
+  }
+}
+
+function handleQrImg() {
+  let isAllChecked = true;
+
+  for (let i = 0; i < stamps.length; i++) {
+    if (!stamps[i].querySelector(".check")) {
+      stamps[i].insertAdjacentHTML("afterbegin", '<span class="check"></span>');
+      isAllChecked = false;
+      alarmMessage.insertAdjacentHTML("afterbegin", newAddMessage);
+      break;
+    }
+  }
+  if (isAllChecked) {
+    stamps.forEach((stamp) => {
+      stamp.innerHTML = "";
+    });
+    alarmMessage.insertAdjacentHTML("afterbegin", newUseMessage);
+  }
+  alarmColor.classList.add("alarmColor");
+}
+
+function handleCard() {
+  if (cards.classList.contains("virtualClass")) {
+    cards.classList.remove("virtualClass");
+    gsap.to(".cardButton_group", {
+      opacity: 0,
+    });
+    gsap.set(".cardButton_group", { display: "none", duration: 2 });
+    shake.pause();
+  } else {
+    cards.classList.add("virtualClass");
+    gsap.to(".cardButton_group", {
+      opacity: 1,
+    });
+    gsap.set(".cardButton_group", { display: "flex", duration: 2 });
+    shake.play();
   }
 }
 
 alarmButton.addEventListener("click", handleAlram);
-
-// 1. 애니메이션이 다 끝나면 알람이미지 흔들리기
-// 2. 알람버튼 누르면 알람 메세지 나오기
-// 3. 다시 눌러서 알람을 확인하면 알람이미지 흔들리지 않기
-
-// 4. Add버튼 누르면 카드 모달창이 뜨고 카드 정보를 입력하고 Add를 누르면 카드목록에 추가
-// 카드 목록 데이터 배열로 저장후 .cardIndex에 렌더링
-
-// 5. 카드누르면(카드 떨림) 적립/사용 버튼과 , 삭제 버튼
-//(삭제버튼 누르면 삭제하시겠습니까 와 비밀번호 입력해서 삭제)
-//(적립/사용 버튼 나오면 큐알코드 제공)
-
-// 6. 적립누르면 10개중에 1개 쌓임
-// 7. 10개 다 쌓이면 카드 색상변화 카드를 누르면 적립/사용 , 삭제 버튼 나오기
-
-// 6. 카드 목록은 데이터 배열 형식으로 정리해서 저장
+qrImg.addEventListener("click", handleQrImg);
+stampAdd.addEventListener("click", handleStampAdd);
+qrModalExitButton.addEventListener("click", handelExit);
+cards.addEventListener("click", handleCard);
