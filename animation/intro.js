@@ -1,5 +1,3 @@
-import { gsap } from "gsap";
-
 // const mainText = new SplitText(".mainIntro", { type: "chars, Lines, words" });
 // const mainChars = mainText.chars;
 

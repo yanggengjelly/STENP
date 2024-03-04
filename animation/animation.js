@@ -1,5 +1,3 @@
-import { gsap } from "gsap";
-
 const shake = gsap.to(".card", {
   duration: 0.4,
   y: -12,

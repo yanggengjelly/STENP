@@ -1,4 +1,3 @@
-import { gsap } from "gsap";
 import tl from "./animation/intro.js";
 import shake from "./animation/animation.js";
 import { newAddMessage, newUseMessage } from "./lib/template.js";
