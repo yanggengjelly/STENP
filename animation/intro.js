@@ -1,20 +1,22 @@
 import { gsap } from "gsap";
 
-const mainText = new SplitText(".mainIntro", { type: "words,chars" });
-const mainChars = mainText.chars;
+// const mainText = new SplitText(".mainIntro", { type: "chars, Lines, words" });
+// const mainChars = mainText.chars;
 
-const subText = new SplitText(".mainIntro-sub", { type: "words,chars" });
-const subChars = subText.chars;
+// const subText = new SplitText(".mainIntro-sub", {
+//   type: "chars, Lines, words",
+// });
+// const subChars = subText.chars;
 
 const tl = gsap.timeline();
-tl.from(mainChars, {
+tl.from(".mainIntro", {
   x: -100,
   duration: 1,
   delay: 1,
   opacity: 0,
   stagger: 0.04,
 });
-tl.from(subChars, {
+tl.from(".mainIntro-sub", {
   y: -300,
   duration: 1.6,
   opacity: 0,

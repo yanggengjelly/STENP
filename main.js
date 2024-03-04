@@ -1,6 +1,6 @@
 import { gsap } from "gsap";
-import tl from "./animation.js/intro.js";
-import shake from "./animation.js/animation.js";
+import tl from "./animation/intro.js";
+import shake from "./animation/animation.js";
 import { newAddMessage, newUseMessage } from "./lib/template.js";
 
 const alarmSpace = document.querySelector(".alarmSpace");
@@ -97,8 +97,8 @@ function handleCard() {
   }
 }
 
-alarmButton.addEventListener("click", handleAlram);
 qrImg.addEventListener("click", handleQrImg);
-stampAdd.addEventListener("click", handleStampAdd);
-qrModalExitButton.addEventListener("click", handelExit);
 cards.addEventListener("click", handleCard);
+stampAdd.addEventListener("click", handleStampAdd);
+alarmButton.addEventListener("click", handleAlram);
+qrModalExitButton.addEventListener("click", handelExit);
