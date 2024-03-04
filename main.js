@@ -3,6 +3,8 @@ import tl from "./animation/intro.js";
 import shake from "./animation/animation.js";
 import { newAddMessage, newUseMessage } from "./lib/template.js";
 
+tl.play();
+
 const alarmSpace = document.querySelector(".alarmSpace");
 const alarmButton = document.querySelector(".header_alarmButton");
 const alarmColor = document.querySelector(".information");
