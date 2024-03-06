@@ -1,36 +1,39 @@
+import {
+  getNode,
+  getNodes,
+  addClass,
+  removeClass,
+  insertFirst,
+  containsClass,
+} from "./lib/lib.js";
 import tl from "./animation/intro.js";
 import shake from "./animation/animation.js";
-import { newAddMessage, newUseMessage } from "./lib/template.js";
+import { newAddMessage, newUseMessage, check } from "./lib/template.js";
 
 tl.play();
 
-const alarmSpace = document.querySelector(".alarmSpace");
-const alarmButton = document.querySelector(".header_alarmButton");
-const alarmColor = document.querySelector(".information");
-
-const alarmMessage = document.querySelector(".alarmIndex");
-
-const cards = document.querySelector(".card");
-
-const stamps = document.querySelectorAll(".stamp");
-const stampAdd = document.querySelector(".stampAdd");
-
-const modal = document.querySelector(".modal");
-const qrModal = document.querySelector(".qrModal");
-
-const qrImg = document.querySelector(".qrImg");
-const qrModalExitButton = document.querySelector(".qrModalExitButton");
+const cards = getNode(".card");
+const qrImg = getNode(".qrImg");
+const modal = getNode(".modal");
+const stamps = getNodes(".stamp");
+const qrModal = getNode(".qrModal");
+const stampAdd = getNode(".stampAdd");
+const alarmSpace = getNode(".alarmSpace");
+const alarmColor = getNode(".information");
+const alarmMessage = getNode(".alarmIndex");
+const alarmButton = getNode(".header_alarmButton");
+const qrModalExitButton = getNode(".qrModalExitButton");
 
 function handleAlram(e) {
   e.preventDefault();
-  if (alarmSpace.classList.contains("virtualClass")) {
-    alarmSpace.classList.remove("virtualClass");
+  if (containsClass((alarmSpace, "virtualClass"))) {
+    removeClass(alarmSpace, "virtualClass");
     gsap.to(".alarmSpace", {
       x: -431,
       duration: 1,
     });
   } else {
-    alarmSpace.classList.add("virtualClass");
+    addClass(alarmSpace, "virtualClass");
     gsap.to(".alarmSpace", {
       x: 0,
       duration: 1,
@@ -41,22 +44,22 @@ function handleAlram(e) {
 
 function handleStampAdd(e) {
   e.preventDefault();
-  if (modal.classList.contains("virtualClass")) {
-    modal.classList.remove("virtualClass");
-    modal.classList.remove("modalRemove");
-    qrModal.classList.remove("modalRemove");
+  if (containsClass(modal, "virtualClass")) {
+    removeClass(modal, "virtualClass");
+    removeClass(modal, "modalRemove");
+    removeClass(qrModal, "modalRemove");
   } else {
-    modal.classList.add("virtualClass");
-    modal.classList.remove("modalRemove");
-    qrModal.classList.remove("modalRemove");
+    addClass(modal, "virtualClass");
+    removeClass(madal, "modalRemove");
+    removeClass(qrModal, "modalRemove");
   }
 }
 
 function handelExit(e) {
   e.preventDefault();
-  if (!modal.classList.contains("modalRemove")) {
-    modal.classList.add("modalRemove");
-    qrModal.classList.add("modalRemove");
+  if (!containsClass(modal, "modalRemove")) {
+    addClass(modal, "modalRemove");
+    addClass(qrModal, "modalRemove");
   }
 }
 
@@ -64,10 +67,10 @@ function handleQrImg() {
   let isAllChecked = true;
 
   for (let i = 0; i < stamps.length; i++) {
-    if (!stamps[i].querySelector(".check")) {
-      stamps[i].insertAdjacentHTML("afterbegin", '<span class="check"></span>');
+    if (!getNode(stamps[i], ".check")) {
+      insertFirst(stamps[i], check);
       isAllChecked = false;
-      alarmMessage.insertAdjacentHTML("afterbegin", newAddMessage);
+      insertFirst(alarmMessage, newAddMessage);
       break;
     }
   }
@@ -75,21 +78,21 @@ function handleQrImg() {
     stamps.forEach((stamp) => {
       stamp.innerHTML = "";
     });
-    alarmMessage.insertAdjacentHTML("afterbegin", newUseMessage);
+    insertFirst(alarmMessage, newUseMessage);
   }
-  alarmColor.classList.add("alarmColor");
+  addClass(alarmColor, "alarmColor");
 }
 
 function handleCard() {
-  if (cards.classList.contains("virtualClass")) {
-    cards.classList.remove("virtualClass");
+  if (containsClass(cards, "virtualClass")) {
+    removeClass(cards, "virtualClass");
     gsap.to(".cardButton_group", {
       opacity: 0,
     });
     gsap.set(".cardButton_group", { display: "none", duration: 2 });
     shake.pause();
   } else {
-    cards.classList.add("virtualClass");
+    addClass(cards, "virtualClass");
     gsap.to(".cardButton_group", {
       opacity: 1,
     });
