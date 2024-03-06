@@ -28,7 +28,7 @@ https://yanggengjelly.github.io/STENP/
   + Gsap의 Timeline은 복잡하고 상세한 트윈애니메이션을 쉽게 조정하고 시퀀싱할 수 있고 브라우저에 최적화된 애니메이션을 효과적으로 렌더링 할 수 있습니다. 그리고 애니메이션 시간 기반의 애니메이션 라인을 직관적으로 생성 할 수 있어 관리와 유지보수가 용이합니다.
  
 ### 🖥️ 기술스택
-Front
+### Front
 
 HTML<br>
 CSS<br>
