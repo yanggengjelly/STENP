@@ -2,8 +2,8 @@ import {
   getNode,
   getNodes,
   addClass,
-  removeClass,
   insertFirst,
+  removeClass,
   containsClass,
 } from "./lib/lib.js";
 import tl from "./animation/intro.js";
@@ -26,7 +26,7 @@ const qrModalExitButton = getNode(".qrModalExitButton");
 
 function handleAlram(e) {
   e.preventDefault();
-  if (containsClass((alarmSpace, "virtualClass"))) {
+  if (containsClass(alarmSpace, "virtualClass")) {
     removeClass(alarmSpace, "virtualClass");
     gsap.to(".alarmSpace", {
       x: -431,
@@ -50,7 +50,7 @@ function handleStampAdd(e) {
     removeClass(qrModal, "modalRemove");
   } else {
     addClass(modal, "virtualClass");
-    removeClass(madal, "modalRemove");
+    removeClass(modal, "modalRemove");
     removeClass(qrModal, "modalRemove");
   }
 }
@@ -67,8 +67,8 @@ function handleQrImg() {
   let isAllChecked = true;
 
   for (let i = 0; i < stamps.length; i++) {
-    if (!getNode(stamps[i], ".check")) {
-      insertFirst(stamps[i], check);
+    if (!stamps[i].querySelector(".check")) {
+      stamps[i].insertAdjacentHTML("afterbegin", check);
       isAllChecked = false;
       insertFirst(alarmMessage, newAddMessage);
       break;
@@ -78,6 +78,7 @@ function handleQrImg() {
     stamps.forEach((stamp) => {
       stamp.innerHTML = "";
     });
+
     insertFirst(alarmMessage, newUseMessage);
   }
   addClass(alarmColor, "alarmColor");
@@ -92,7 +93,7 @@ function handleCard() {
     gsap.set(".cardButton_group", { display: "none", duration: 2 });
     shake.pause();
   } else {
-    addClass(cards, "virtualClass");
+    cards.classList.add("virtualClass");
     gsap.to(".cardButton_group", {
       opacity: 1,
     });
