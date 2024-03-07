@@ -1,11 +1,3 @@
-// const mainText = new SplitText(".mainIntro", { type: "chars, Lines, words" });
-// const mainChars = mainText.chars;
-
-// const subText = new SplitText(".mainIntro-sub", {
-//   type: "chars, Lines, words",
-// });
-// const subChars = subText.chars;
-
 const tl = gsap.timeline();
 tl.from(".mainIntro", {
   x: -100,
