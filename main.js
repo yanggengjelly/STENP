@@ -56,7 +56,6 @@ let modal = null; // 전역 변수로 모달을 선언합니다.
 const alarmMessage = getNode(".alarmIndex");
 
 // ! 적립/사용 / 카드삭제 버튼 등장 / 애니메이션 효과 적립/사용 모달
-// ! 적립/사용 / 카드삭제 버튼 등장 / 애니메이션 효과 적립/사용 모달
 cards.forEach((card) => {
   card.addEventListener("click", (event) => {
     const buttonGroup = event.currentTarget.nextElementSibling;
@@ -106,6 +105,7 @@ cards.forEach((card) => {
 
         // QR 코드 이미지 클릭 시
         const qrImg = modal.querySelector(".qrImg");
+        var stamp = document.querySelectorAll(".couponStamp .stamp");
         if (qrImg) {
           qrImg.addEventListener("click", () => {
             const stamps = card.querySelectorAll(".stamp");
@@ -127,6 +127,9 @@ cards.forEach((card) => {
                 (cafe) => cafe.id === parseInt(card.dataset.cafeId)
               );
               insertFirst(alarmMessage, useMessage(cafe));
+              stamp.forEach(function (span) {
+                span.innerHTML = ""; // 각 span 안의 내용을 비워줍니다.
+              }); // 각 스탬프를 비워줍니다.
             } else {
               // 스탬프 추가
               for (let i = 0; i < stamps.length; i++) {
