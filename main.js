@@ -1,16 +1,47 @@
 import {
-  containsClass,
   getNode,
   getNodes,
+  insertFirst,
   insertLast,
-  toggleClass,
+  removeClass,
+  addClass,
 } from "./lib/lib.js";
 import gsap from "gsap";
 import tl from "./animation/intro.js";
 import cafesData from "./data/data.js";
-import { cardTemplate, qrTemplate } from "./lib/template.js";
+import {
+  cardTemplate,
+  qrTemplate,
+  check,
+  addMessage,
+  useMessage,
+} from "./lib/template.js"; //
 
 tl.play();
+
+const alarmButton = getNode(".header_alarmButton");
+const alarmColor = getNode(".information");
+const alarmSpace = getNode(".alarmSpace");
+
+// ! 알람 공간 on/off
+function handleAlram(e) {
+  e.preventDefault();
+  if (alarmSpace.classList.contains("virtualClass")) {
+    removeClass(alarmSpace, "virtualClass");
+    gsap.to(".alarmSpace", {
+      x: -431,
+      duration: 1,
+    });
+  } else {
+    addClass(alarmSpace, "virtualClass");
+    gsap.to(".alarmSpace", {
+      x: 0,
+      duration: 1,
+    });
+  }
+  alarmColor.classList.remove("alarmColor");
+}
+alarmButton.addEventListener("click", handleAlram);
 
 // ! 카드렌더링
 const cardIndex = getNode(".cardIndex");
@@ -22,18 +53,20 @@ cafesData.forEach((cafe) => {
 
 const cards = getNodes(".card"); // 카드추가 후에 cards 변수 선언
 let modal = null; // 전역 변수로 모달을 선언합니다.
+const alarmMessage = getNode(".alarmIndex");
 
+// ! 적립/사용 / 카드삭제 버튼 등장 / 애니메이션 효과 적립/사용 모달
+// ! 적립/사용 / 카드삭제 버튼 등장 / 애니메이션 효과 적립/사용 모달
 cards.forEach((card) => {
   card.addEventListener("click", (event) => {
     const buttonGroup = event.currentTarget.nextElementSibling;
-    const cardElement = event.currentTarget; // 클릭된 카드 요소를 가져옵니다.
+    const cardElement = event.currentTarget;
 
-    buttonGroup.classList.toggle("view"); // hidden 클래스를 토글하여 보이거나 숨깁니다.
+    buttonGroup.classList.toggle("view");
 
-    // 버튼 그룹이 보일 때 애니메이션 시작
+    // 애니메이션 시작
     if (buttonGroup.classList.contains("view")) {
       const shake = gsap.to(cardElement, {
-        // 클릭된 카드에 대해서만 shake 애니메이션을 정의합니다.
         duration: 0.08,
         x: 10,
         repeat: -1,
@@ -44,33 +77,69 @@ cards.forEach((card) => {
       shake.play();
     } else {
       gsap.from(cardElement, {
-        // 클릭된 카드에 대해서만 원래 위치로 되돌아가는 애니메이션을 정의합니다.
         duration: 0.2,
         x: 0,
       });
-      gsap.killTweensOf(cardElement); // 클릭된 카드에 대한 애니메이션을 중지합니다.
+      gsap.killTweensOf(cardElement);
     }
 
-    // stampAdd 버튼이 클릭되었을 때 모달이 나타나도록 합니다.
+    // 스탬프 추가 버튼 클릭 시
     const stampAddButton = buttonGroup.querySelector(".stampAdd");
-    stampAddButton.addEventListener("click", () => {
-      // 이전에 생성된 모달이 있으면 제거합니다.
-      if (modal) {
-        modal.remove();
-      }
+    if (stampAddButton) {
+      stampAddButton.addEventListener("click", () => {
+        // 이전에 생성된 모달이 있으면 제거
+        if (modal) {
+          modal.remove();
+        }
 
-      modal = document.createElement("div");
-      modal.classList.add("modal"); // 모달에 클래스 추가
-      modal.innerHTML = qrTemplate;
-      document.body.appendChild(modal);
+        modal = document.createElement("div");
+        modal.classList.add("modal");
+        modal.innerHTML = qrTemplate;
+        document.body.appendChild(modal);
 
-      // 모달이 생성된 후 qrModalExitButton에 대한 클릭 이벤트 리스너를 추가합니다.
-      const qrModalExitButton = modal.querySelector(".qrModalExitButton");
-      qrModalExitButton.addEventListener("click", () => {
-        modal.remove(); // 모달을 제거합니다.
-        modal = null; // 모달 변수를 null로 초기화합니다.
+        // 모달 닫기 버튼 클릭 이벤트
+        const qrModalExitButton = modal.querySelector(".qrModalExitButton");
+        qrModalExitButton.addEventListener("click", () => {
+          modal.remove();
+          modal = null;
+        });
+
+        // QR 코드 이미지 클릭 시
+        const qrImg = modal.querySelector(".qrImg");
+        if (qrImg) {
+          qrImg.addEventListener("click", () => {
+            const stamps = card.querySelectorAll(".stamp");
+            let stampCount = 0;
+
+            stamps.forEach((stamp) => {
+              if (stamp.querySelector(".check")) {
+                const cafe = cafesData.find(
+                  (cafe) => cafe.id === parseInt(card.dataset.cafeId)
+                );
+                insertFirst(alarmMessage, addMessage(cafe));
+                stampCount++;
+              }
+            });
+
+            // 스탬프 10개 모두 채워졌을 때
+            if (stampCount === 10) {
+              const cafe = cafesData.find(
+                (cafe) => cafe.id === parseInt(card.dataset.cafeId)
+              );
+              insertFirst(alarmMessage, useMessage(cafe));
+            } else {
+              // 스탬프 추가
+              for (let i = 0; i < stamps.length; i++) {
+                if (!stamps[i].querySelector(".check")) {
+                  stamps[i].innerHTML = check;
+                  break;
+                }
+              }
+            }
+          });
+        }
       });
-    });
+    }
   });
 });
 
@@ -92,14 +161,18 @@ function handleDeleteButtonClick(event) {
     console.log("Cafe ID:", cafeId); // 카페 ID 확인
 
     if (!isNaN(cafeId)) {
-      // cafesData 배열에서 해당 카페 제거
-      const updatedCafeData = cafesData.filter((cafe) => cafe.id !== cafeId);
+      const realDelete = confirm("정말로 쿠폰을 삭제하시겠습니까?");
 
-      // .cardButton_group 요소 삭제
-      cardButtonGroup.remove();
+      if (realDelete) {
+        // cafesData 배열에서 해당 카페 제거
+        const updatedCafeData = cafesData.filter((cafe) => cafe.id !== cafeId);
 
-      // 카드를 화면에서 제거합니다.
-      card.remove();
+        // .cardButton_group 요소 삭제
+        cardButtonGroup.remove();
+
+        // 카드를 화면에서 제거합니다.
+        card.remove();
+      }
     }
   }
 }

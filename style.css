@@ -21,7 +21,7 @@
   width: 100%;
   margin: auto;
   position: relative;
-  overflow: hidden;
+  /* overflow: hidden; */
 }
 
 /* ! Intro */
@@ -147,7 +147,7 @@ h1 {
   text-shadow: 4px 4px 6px var(--color-sub-color40);
 }
 .cafeDescription {
-  font-size: 1.4rem;
+  font-size: 1.6rem;
   font-weight: 600;
   color: var(--color-sub-color20);
   text-shadow: 4px 4px 6px var(--color-sub-color40);
